@@ -1,5 +1,5 @@
 <nav class="bg-sky-100">
-  <div class="flex justify-between items-center py-4 px-3">
+  <div class="flex justify-between items-center py-4 px-8">
     <img
       class="w-[5rem] cursor-pointer"
       onclick="window.open('/','_SELF')"
@@ -15,7 +15,8 @@
 
     @if (!$signed_in)
       <div class="flex gap-2">
-        <a href="/register" class="px-3 hover:text-white hover:bg-black py-2 border rounded-sm">Sign Up</a>
+        <a href="/register" class="px-3 hover:text-white hover:bg-black py-2 border
+        rounded-sm">Register</a>
         <a href="/login" class="px-3 hover:text-white hover:bg-black py-2 border rounded-sm">Login</a>
       </div>
     @else
