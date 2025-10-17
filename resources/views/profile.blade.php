@@ -1,7 +1,8 @@
 <x-layout>
   <x-navbar />
 
-  <form class="mt-30 w-fit mx-auto" hx-post="/profile-update" hx-target="#res">
+  <form class="mt-30 w-fit mx-auto" enctype="multipart/form-data"
+    hx-post="/profile-update" hx-target="#res">
     @csrf
 
     <header class="mb-8">
@@ -35,9 +36,10 @@
       </div>
 
       <div>
-        <label for="profile">Profile Picture</label>
-        <img id="output-img" class="max-w-[30rem]" src="/storage/{{ $user->picture }}" />
-        <input onchange="display_image(event)" class="underline cursor-pointer font-semibold" name="picture" type="file" />
+        <label for="picture">Profile Picture</label>
+        <img id="output-img" class="max-w-[20rem]" src="/storage/{{ $user->picture }}" />
+        <input onchange="display_image(event)" class="underline cursor-pointer
+          font-semibold" name="picture" type="file" accept="image/*" />
       </div>
     </div>
 

@@ -25,11 +25,12 @@ Route::post("/profile-update", function(Request $request) {
     "name" => "required|string",
     "email" => "required|email",
     "mobile_no" => "string",
+    "picture" => "image",
     "address" => "required|string",
   ]);
 
-  if ($request->hasFile("picture")) {
-    $info["picture"] = $request->file("picture")->storePublicly("uploads");
+  if ($request->file("picture")) {
+    $info["picture"] = $request->file("picture")->store("uploads", "public");
   }
 
   $user = Auth::user();
@@ -84,7 +85,7 @@ Route::post("/register", function (Request $request) {
     "gender" => "required|string",
   ]);
 
-  $info['picture'] = $request->file("picture")->storePublicly("uploads", "public") or function() {
+  $info['picture'] = $request->file("picture")->store("uploads", "public") or function() {
     return response("File operation failed!", 500);
   };
 
