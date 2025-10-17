@@ -1,13 +1,15 @@
 <x-layout>
   <x-navbar />
 
-  <main>
-    <header>
+  <form class="mt-30 w-fit mx-auto" hx-post="/profile-update" hx-target="#res">
+    @csrf
+
+    <header class="mb-8">
       <h1 class="font-bold text-3xl">{{ $user->name }}</h1>
-      <p class="text-lg">{{ $user->email }}</p>
+      <p class="text-lg underline">{{ $user->email }}</p>
     </header>
 
-    <form class="mt-10 flex" hx-post="/profile-update">
+    <div class="flex gap-10 text-lg">
       <div class="flex flex-col gap-4">
         <div>
           <label class="block font-semibold" id="name">Name:</label>
@@ -17,11 +19,6 @@
         <div>
           <label class="block font-semibold" id="email">Email:</label>
           <input class="border bg-white p-1" name="email" value="{{ $user->email }}" />
-        </div>
-
-        <div>
-          <label class="block font-semibold" id="father">Father's name:</label>
-          <input class="border bg-white p-1" name="father" value="{{ $user->father_name }}" />
         </div>
 
         @if ($user->mobile_no)
@@ -39,9 +36,19 @@
 
       <div>
         <label for="profile">Profile Picture</label>
-        <img src="/storage/{{ $user->picture }}" />
+        <img id="output-img" class="max-w-[30rem]" src="/storage/{{ $user->picture }}" />
+        <input onchange="display_image(event)" class="underline cursor-pointer font-semibold" name="picture" type="file" />
       </div>
-    </form>
-  </main>
+    </div>
 
+    <p class="mt-5" id="res"></p>
+    <button class="px-4 py-2 mt-5 font-semibold text-lg cursor-pointer bg-zinc-800 text-white rounded-sm" type="submit">Update</button>
+  </form>
 </x-layout>
+
+<script>
+function display_image(event) {
+  const link = document.getElementById("output-img");
+  link.src = URL.createObjectURL(event.target.files[0]);
+}
+</script>

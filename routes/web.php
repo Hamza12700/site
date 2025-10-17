@@ -20,6 +20,23 @@ Route::get("/profile", function() {
   return view("profile", ["user" => Auth::user()]);
 })->middleware("auth");
 
+Route::post("/profile-update", function(Request $request) {
+  $info = $request->validate([
+    "name" => "required|string",
+    "email" => "required|email",
+    "mobile_no" => "string",
+    "address" => "required|string",
+  ]);
+
+  if ($request->hasFile("picture")) {
+    $info["picture"] = $request->file("picture")->storePublicly("uploads");
+  }
+
+  $user = Auth::user();
+  User::where("id", $user->id)->update($info);
+  return response("Successfully Updated", 200);
+})->middleware("auth");
+
 Route::get("/logout", function(Request $request) {
   Auth::logout();
   $request->session()->invalidate();
