@@ -103,7 +103,7 @@ Route::post("/register", function (Request $request) {
     "password" => "required|string",
     "father_name" => "required|string",
     "address" => "required|string",
-    "mobile_no" => "string",
+    "mobile_no" => "nullable|string",
     "gender" => "required|string",
   ]);
 

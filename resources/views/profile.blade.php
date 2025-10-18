@@ -10,7 +10,7 @@
       <p class="text-lg underline">{{ $user->email }}</p>
     </header>
 
-    <div class="flex gap-10 text-lg">
+    <div class="flex items-center gap-10 text-lg">
       <div class="flex flex-col gap-4">
         <div>
           <label class="block font-semibold" id="name">Name:</label>
