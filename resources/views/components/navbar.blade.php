@@ -22,7 +22,6 @@
     @else
       <div>
         <a href="/profile" class="px-3 hover:text-white hover:bg-black py-2 border rounded-sm">Profile</a>
-        <a href="/attendence" class="px-3 hover:text-white hover:bg-black py-2 border rounded-sm">Mark Attendence</a>
       </div>
     @endif
   </div>

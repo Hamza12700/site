@@ -17,7 +17,8 @@
   </address>
 
   <p class="bg-zinc-900 text-white text-center py-4 font-semibold">
-    Developed by <a class="text-blue-500 underline" href="https://www.federalinstituteofskills.com" target="_BLANK">FITS</a> Soft Corporation.
+    Developed by <a class="text-blue-500 underline" href="https://github.com/Hamza12700/"
+      target="_BLANK">Hamza Rashid</a> | Web Developer
   </p>
 </footer>
 

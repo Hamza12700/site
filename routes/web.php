@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Emails;
 
 // Sucks that can't simply use 'redirect' because of HTMX.
 // Htmx doesn't reload/redirect if status code isn't 2xx.
@@ -20,6 +21,23 @@ Route::get("/about-us", function() {
   return view("about-us");
 });
 
+Route::get("/contact-us", function() {
+  return view("contact-us");
+});
+
+Route::post("/contact-us", function(Request $request) {
+  $info = $request->validate([
+    "email" => "required|email",
+    "subject" => "required|string",
+    "name" => "required|string",
+    "description" => "required|string",
+    "mobile_no" => "nullable|string",
+  ]);
+
+  Emails::create($info);
+  return view("components.email_created");
+});
+
 Route::get("/profile", function() {
   return view("profile", ["user" => Auth::user()]);
 })->middleware("auth");
@@ -28,8 +46,8 @@ Route::post("/profile-update", function(Request $request) {
   $info = $request->validate([
     "name" => "required|string",
     "email" => "required|email",
-    "mobile_no" => "string",
-    "picture" => "image",
+    "mobile_no" => "nullable|string",
+    "picture" => "nullable|image",
     "address" => "required|string",
   ]);
 
