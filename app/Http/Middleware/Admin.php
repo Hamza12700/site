@@ -4,10 +4,10 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
 
-class Auth
+class Admin
 {
   /**
      * Handle an incoming request.
@@ -16,10 +16,14 @@ class Auth
      */
   public function handle(Request $request, Closure $next): Response
   {
-    if (!Auth::chech()) {
-      return redirect("/login");
+    $user = Auth::user();
+    $admin_whitlist = config("app.admins");
+    foreach ($admin_whitlist as $admin) {
+      if ($user->email === $admin) {
+        return $next($request);
+      }
     }
 
-    return $next($request);
+    return redirect("/");
   }
 }

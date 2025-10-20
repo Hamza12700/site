@@ -3,7 +3,7 @@
     <img
       class="w-[5rem] cursor-pointer"
       onclick="window.open('/','_SELF')"
-      src="logo.png"/>
+      src="/logo.png"/>
 
     <form class="flex gap-2">
       <input class="border w-[25rem] py-2 p-1 bg-white rounded-sm" type="search" placeholder="Search Courses...">

@@ -45,7 +45,6 @@ fieldset {
 
 .form button {
   background: white;
-  font-family: auto;
   padding: 0.6em 1.3em;
   font-weight: 900;
   font-size: 18px;

@@ -38,13 +38,19 @@
       <div>
         <label for="picture">Profile Picture</label>
         <img id="output-img" class="max-w-[20rem]" src="/storage/{{ $user->picture }}" />
-        <input onchange="display_image(event)" class="underline cursor-pointer
-          font-semibold" name="picture" type="file" accept="image/*" />
+        <input onchange="display_image(event)"
+          class="underline cursor-pointer font-semibold"
+          name="picture" type="file" accept="image/*" />
       </div>
     </div>
 
     <p class="mt-5" id="res"></p>
-    <button class="px-4 py-2 mt-5 font-semibold text-lg cursor-pointer bg-zinc-800 text-white rounded-sm" type="submit">Update</button>
+    <button
+      class="px-4 py-2 font-semibold text-lg cursor-pointer bg-zinc-800 text-white rounded-sm"
+      type="submit">Update</button>
+    <a
+      href="/logout"
+      class="px-4 py-3 font-semibold text-lg cursor-pointer bg-zinc-800 text-white rounded-sm">Logout</a>
   </form>
 </x-layout>
 

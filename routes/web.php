@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Http\Middleware\Admin;
 use App\Models\Emails;
 
 // Sucks that can't simply use 'redirect' because of HTMX.
@@ -23,6 +24,58 @@ Route::get("/about-us", function() {
 
 Route::get("/contact-us", function() {
   return view("contact-us");
+});
+
+Route::middleware(["auth", Admin::class])->group(function () {
+  Route::get("/students", function () {
+    return view("students", ["students" => User::all()]);
+  });
+
+  Route::get("/student-detail", function (Request $request) {
+    if (!$request->query("id")) {
+      return redirect("/students");
+    }
+
+    $id = $request->query("id");
+    $user = User::find($id);
+
+    $created_at = date_parse($user->created_at);
+    $join_date = sprintf("%d-%d-%d", $created_at['year'], $created_at['month'], $created_at['day']);
+    return view("student-detail", ["student" => User::find($id), "join_date" => $join_date]);
+  });
+
+  Route::get("/student-detail/edit", function(Request $request) {
+    if (!$request->query("id")) {
+      return back();
+    }
+
+    $id = (int)$request->query("id");
+    $user = User::find($id);
+    return view("edit-student", ["student" => $user]);
+  });
+
+  Route::post("/student-update", function (Request $request) {
+    if (!$request->query("id")) {
+      return back();
+    }
+    $id = (int)$request->query("id");
+
+    $info = $request->validate([
+      "name" => "required|string",
+      "father_name" => "required|string",
+      "email" => "required|email",
+      "mobile_no" => "nullable|string",
+      "picture" => "nullable|image",
+      "address" => "required|string",
+    ]);
+
+    if ($request->file("picture")) {
+      $info["picture"] = $request->file("picture")->store("uploads", "public");
+    }
+
+    User::where("id", $id)->update($info);
+    return response("Successfully Updated", 200);
+  });
 });
 
 Route::post("/contact-us", function(Request $request) {
@@ -70,7 +123,7 @@ Route::get("/logout", function(Request $request) {
 Route::get("/login", function () {
   if (Auth::check()) { return redirect("/profile"); }
   return view("login");
-});
+})->name("login");
 
 Route::post("/login", function (Request $request) {
   $creds = $request->validate([

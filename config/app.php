@@ -15,10 +15,11 @@ return [
 
   'name' => env('APP_NAME', 'LMS'),
 
-  'icon' => 'fav.png',
+  'icon' => '/fav.png',
   'email' => 'info@speaknact.com',
   'mobile_no' => '+92 3003050936',
   'address' => 'Bahria Town Phase 8 Sector C Rawalpindi',
+  'admins' => ["nice@gmail.com", "me@gmail.com"],
 
   /*
     |--------------------------------------------------------------------------

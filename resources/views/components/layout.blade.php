@@ -9,7 +9,7 @@
     <link rel="icon" href="{{ config('app.icon') }}" type="image/x-icon">
     @vite('resources/css/app.css')
   </head>
-  <body style="background: url('texture2.png');">
+  <body style="background: url('/texture2.png');">
     {{ $slot }}
   </body>
 </html>
