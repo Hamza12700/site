@@ -37,7 +37,7 @@
 
       <div>
         <label for="picture">Profile Picture</label>
-        <img id="output-img" class="max-w-[20rem]" src="/storage/{{ $user->picture }}" />
+        <img id="output-img" class="h-[20rem] object-cover w-[20rem]" src="/storage/{{ $user->picture }}" />
         <input onchange="display_image(event)"
           class="underline cursor-pointer font-semibold"
           name="picture" type="file" accept="image/*" />
