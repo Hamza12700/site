@@ -5,7 +5,10 @@
     hx-post="/profile-update" hx-target="#res">
     @csrf
 
-    <header class="mb-8">
+    <header class="mb-8 relative">
+      <button
+        onclick="history.back()"
+        class="text-3xl absolute cursor-pointer top-[-2px] left-[-40px]">&Larr;</button>
       <h1 class="font-bold text-3xl">{{ $user->name }}</h1>
       <p class="text-lg underline">{{ $user->email }}</p>
     </header>
