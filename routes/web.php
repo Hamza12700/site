@@ -27,6 +27,33 @@ Route::get("/contact-us", function() {
 });
 
 Route::middleware(["auth", Admin::class])->group(function () {
+  Route::get("/admin", function () {
+    return view("admin");
+  });
+
+  Route::get("/emails", function () {
+    return view("emails", ["emails" => Emails::all()]);
+  });
+
+  Route::get("/email", function (Request $request) {
+    if (!$request->query("view")) {
+      return redirect("/emails");
+    }
+
+    $id = (int)$request->query("view");
+    return view("view-email", ["email" => Emails::find($id)]);
+  });
+
+  Route::delete("/email", function (Request $request) {
+    if (!$request->query("remove")) {
+      return response("Bad Request", 400);
+    }
+
+    $id = (int)$request->query("remove");
+    Emails::destroy($id);
+    return "<script>document.getElementById('$id').remove()</script>";
+  });
+
   Route::get("/students", function () {
     return view("students", ["students" => User::all()]);
   });
@@ -131,7 +158,7 @@ Route::post("/login", function (Request $request) {
     "password" => "required|string",
   ]);
 
-  if (Auth::attempt($creds)) {
+  if (Auth::attempt($creds, true)) {
     $request->session()->regenerate();
     return hx_redirect("/profile");
   }

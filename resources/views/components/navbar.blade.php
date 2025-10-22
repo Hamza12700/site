@@ -21,7 +21,8 @@
       </div>
     @else
       <div>
-        <a href="/profile" class="px-3 hover:text-white hover:bg-black py-2 border rounded-sm">Profile</a>
+        <a href="/profile" class="px-3 hover:underline font-semibold text-white bg-black py-2 border rounded-sm">Profile</a>
+        <a href="/admin" class="px-3 hover:underline font-semibold text-white bg-black py-2 border rounded-sm">Admin</a>
       </div>
     @endif
   </div>
