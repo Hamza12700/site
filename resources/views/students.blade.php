@@ -1,7 +1,10 @@
 <x-layout>
   <x-navbar/>
 
-  <h1 class="font-semibold text-3xl text-center my-10">"Registered Students List"</h1>
+  <header class="relative items-center flex justify-center">
+    <a class="font-semibold mr-3" href="/admin">&larrhk;</a>
+    <h1 class="font-semibold w-fit text-3xl my-10">Registered Students</h1>
+  </header>
   <main class="px-4 flex flex-wrap gap-4">
     @foreach ($students as $student)
     <div onclick="navigate({{ $student->id }})" class="border rounded-md p-3 bg-neutral-100 cursor-pointer w-fit">
